@@ -8,7 +8,6 @@ namespace MVC_Lab3.Models
 {
     public class Movie
     {
-        //Hej hoppas det ska funka
         string title;
         string originalTitle;
         int releaseYear;
@@ -19,6 +18,9 @@ namespace MVC_Lab3.Models
         // List<string> genre;
         // List<string> actors;
         //int MovieID;
+
+        public int MovieID { get; set; }
+
 
         public string Title
         {
@@ -55,7 +57,6 @@ namespace MVC_Lab3.Models
             get { return actors; }
             set { actors = value; }
         }
-        public int MovieID { get; set; }
 
 
     }
