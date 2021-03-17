@@ -8,6 +8,7 @@ namespace MVC_Lab3.Models
 {
     public class Movie
     {
+        //Hej hoppas det ska funka
         string title;
         string originalTitle;
         int releaseYear;
