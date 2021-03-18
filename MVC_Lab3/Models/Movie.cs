@@ -8,6 +8,9 @@ namespace MVC_Lab3.Models
 {
     public class Movie
     {
+        public int MovieID { get; set; }
+
+
         string title;
         string originalTitle;
         int releaseYear;
@@ -19,10 +22,7 @@ namespace MVC_Lab3.Models
         // List<string> actors;
         //int MovieID;
 
-        public int MovieID { get; set; }
-
-
-        public string Title
+        public string Title 
         {
             get { return title; }
             set { title = value; }
@@ -32,12 +32,12 @@ namespace MVC_Lab3.Models
             get { return originalTitle; }
             set { originalTitle = value; }
         }
-        public int ReleaseYear
+        public int ReleaseYear 
         {
             get { return releaseYear; }
             set { releaseYear = value; }
         }
-        public double Rating
+        public double Rating 
         {
             get { return rating; }
             set { rating = value; }
@@ -57,6 +57,7 @@ namespace MVC_Lab3.Models
             get { return actors; }
             set { actors = value; }
         }
+
 
 
     }
