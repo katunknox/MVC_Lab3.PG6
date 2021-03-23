@@ -45,8 +45,9 @@ namespace WcfService
         {
             //skap nytt xelement med nu rot nod t.ex movies
             //för varje movie i _movies skapa nytt exeleemt(//jobject in vår lista skapa nytt movi som läggs till under rotnooden )
-            //movie onject 
+            //movie object 
             //add() nytt  utanför loopen
+
             foreach (var item in _movies)   //item = en jobject, en film i _movies
             {
                 XElement Movie = new XElement("Movies",
@@ -59,6 +60,7 @@ namespace WcfService
                     //new XElement("Genre", item.Genre),
                     //new XElement("Actors", item.Actors),
             }
+
 
            throw new NotImplementedException();
         }
