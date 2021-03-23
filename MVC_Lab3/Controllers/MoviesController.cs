@@ -8,18 +8,34 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Lab3.Context;
 using MVC_Lab3.Models;
+using MVC_Lab3.ServiceReference1;
 
 namespace MVC_Lab3.Controllers
 {
     public class MoviesController : Controller
     {
+        Service1Client cliobj = new Service1Client();   //sk denna vara här? // initiera en koppling mellan vår klient och vår service
         private MovieContext db = new MovieContext();
-
         // GET: Movies
-        public ActionResult Index()
+        public ActionResult Index(string Input)
         {
-            return View(db.Movies.ToList());
+            //cliobj.GetAllMovies();
+
+
+            int num = -1;
+            if (!int.TryParse(Input, out num))
+            {
+                return View(db.Movies.Where(x => x.Title.Contains(Input) ||
+                                             x.OriginalTitle.Contains(Input) ||
+                                             x.Genre.Contains(Input) || Input == null).ToList());
+            }
+            else
+            {
+                int year = Convert.ToInt32(Input);
+                return View(db.Movies.Where(x => x.ReleaseYear == year || Input == null).ToList());
+            }
         }
+
 
         // GET: Movies/Details/5
         public ActionResult Details(int? id)
@@ -47,7 +63,7 @@ namespace MVC_Lab3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MovieID,Title,OriginalTitle,ReleaseYear,Rating,Synopsis,Genre,Actors")] Movie movie)
+        public ActionResult Create(Movie movie)//[Bind(Include = "MovieID,Title,OriginalTitle,ReleaseYear,Rating,Synopsis,Genre,Actors")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +95,7 @@ namespace MVC_Lab3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MovieID,Title,OriginalTitle,ReleaseYear,Rating,Synopsis,Genre,Actors")] Movie movie)
+        public ActionResult Edit(Movie movie)//[Bind(Include = "MovieID,Title,OriginalTitle,ReleaseYear,Rating,Synopsis,Genre,Actors")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -123,6 +139,12 @@ namespace MVC_Lab3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult SearchTitle(Movie movie)
+        {
+            //ViewBag.SearchTitle = movie.Title;
+            ViewBag.InputTitle = movie.Title;
+            return View(db.Movies.ToList());
         }
     }
 }
