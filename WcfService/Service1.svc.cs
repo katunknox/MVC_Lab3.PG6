@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace WcfService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
@@ -24,6 +25,7 @@ namespace WcfService
 
         public Service1()
         {
+            //Connects to the API and converts the collected data from json to XElements.
             using (WebClient webClient = new WebClient())
             {
                 string jsonMovieString = webClient.DownloadString(
@@ -44,23 +46,23 @@ namespace WcfService
             //skap nytt xelement med nu rot nod t.ex movies
             //för varje movie i _movies skapa nytt exeleemt(//jobject in vår lista skapa nytt movi som läggs till under rotnooden )
             //movie onject 
-            //add() nytt  utanför(?) loopen
-            XElement all = new XElement("Movies");
-            foreach (var item in _movies)   //item = en jobject, en film i _movies
+            XElement Movies = new XElement("Movies");
+            foreach (var movie in _movies)   //item = en jobject, en film i _movies
             {
                 XElement Movie = new XElement("Movie",
-                    new XElement("Title", item["Title"]),
-                    new XElement("OriginalTitle", item["OriginalTitle"]),
-                    new XElement("ReleaseYear", item["ReleaseYear"]),
-                    new XElement("Rating", item["Rating"]),
-                    new XElement("Synopsis", item["Synopsis"]));
+                    new XElement("Title", movie["Title"]),
+                    new XElement("OriginalTitle", movie["OriginalTitle"]),
+                    new XElement("ReleaseYear", movie["ReleaseYear"]),
+                    new XElement("Rating", movie["Rating"]),
+                    new XElement("Synopsis", movie["Synopsis"]));
 
                 //new XElement("Genre", item.Genre),
                 //new XElement("Actors", item.Actors),
-                all.Add(Movie);
+                Movies.Add(Movie);
 
             }
-            return all;//throw new NotImplementedException();
+            return Movies;//throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         public XElement GetTopTenMovies()
