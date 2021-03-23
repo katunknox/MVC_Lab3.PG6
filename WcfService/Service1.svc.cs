@@ -17,10 +17,9 @@ namespace WcfService
     public class Service1 : IService1
     {
         static List<JObject> _movies;
-        static XElement _actors;
-        static XElement _genre;
+        static List<JObject> _actors;
+        static List<JObject> _genre;
 
-        static XElement completeData;
 
 
         public Service1()
@@ -34,11 +33,11 @@ namespace WcfService
 
                 string jsonActString = webClient.DownloadString(
                 Encoding.UTF8.GetString(Convert.FromBase64String("aHR0cDovL3ByaXZhdC5iYWhuaG9mLnNlL3diNzE0ODI5L2pzb24vYWN0b3JzLmpzb24=")));
-                _actors = JsonConvert.DeserializeObject<XElement>(jsonActString);
+                _actors = JsonConvert.DeserializeObject<List<JObject>>(jsonActString);
 
                 string jsonGenreString = webClient.DownloadString(
                 Encoding.UTF8.GetString(Convert.FromBase64String("aHR0cDovL3ByaXZhdC5iYWhuaG9mLnNlL3diNzE0ODI5L2pzb24vZ2VucmUuanNvbg==")));
-                _genre = JsonConvert.DeserializeObject<XElement>(jsonGenreString);
+                _genre = JsonConvert.DeserializeObject<List<JObject>>(jsonGenreString);
             }
         }
         public XElement GetAllMovies()
