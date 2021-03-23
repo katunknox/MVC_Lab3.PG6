@@ -8,7 +8,13 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
+
+    @using (Html.BeginForm())
+    {
+            @Html.TextBox("Input")
+            <input type="submit" value="Search" class="btn btn-default" />
+    }
+    </p>
 <table class="table">
     <tr>
         <th>
