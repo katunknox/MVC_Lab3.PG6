@@ -45,12 +45,20 @@ namespace WcfService
             //för varje movie i _movies skapa nytt exeleemt(//jobject in vår lista skapa nytt movi som läggs till under rotnooden )
             //movie onject 
             //add() nytt  utanför loopen
-            XElement completeMovie = new XElement("Movies");
-            //foreach (var item in collection)
-            //{
+            foreach (var item in _movies)   //item = en jobject, en film i _movies
+            {
+                XElement Movie = new XElement("Movies",
+                    new XElement("Title", item["Title"])); 
+                    //new XElement("OriginalTitle", item.OriginalTitle),
+                    //new XElement("ReleaseYear", item.ReleaseYear),
+                    //new XElement("Rating", item.Rating),
+                    //new XElement("Synopsis", item.Synopsis)
 
-            //}
-            throw new NotImplementedException();
+                    //new XElement("Genre", item.Genre),
+                    //new XElement("Actors", item.Actors),
+            }
+
+           throw new NotImplementedException();
         }
 
         public XElement GetTopTenMovies()
