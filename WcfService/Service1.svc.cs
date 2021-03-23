@@ -24,7 +24,6 @@ namespace WcfService
 
         public Service1()
         {
-            //Connects to the API and converts the collected data from json to XElements.
             using (WebClient webClient = new WebClient())
             {
                 string jsonMovieString = webClient.DownloadString(
@@ -47,7 +46,10 @@ namespace WcfService
             //movie onject 
             //add() nytt  utanför loopen
             XElement completeMovie = new XElement("Movies");
+            //foreach (var item in collection)
+            //{
 
+            //}
             throw new NotImplementedException();
         }
 
