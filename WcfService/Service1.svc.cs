@@ -46,21 +46,22 @@ namespace WcfService
             //skap nytt xelement med nu rot nod t.ex movies
             //för varje movie i _movies skapa nytt exeleemt(//jobject in vår lista skapa nytt movi som läggs till under rotnooden )
             //movie onject 
-            //add() nytt  utanför loopen
-            foreach (var item in _movies)   //item = en jobject, en film i _movies
+            XElement Movies = new XElement("Movies");
+            foreach (var movie in _movies)   //item = en jobject, en film i _movies
             {
-                XElement Movie = new XElement("Movies",
-                    new XElement("Title", item["Title"])); 
-                    //new XElement("OriginalTitle", item.OriginalTitle),
-                    //new XElement("ReleaseYear", item.ReleaseYear),
-                    //new XElement("Rating", item.Rating),
-                    //new XElement("Synopsis", item.Synopsis)
+                XElement Movie = new XElement("Movie",
+                    new XElement("Title", movie["Title"]),
+                    new XElement("OriginalTitle", movie["OriginalTitle"]),
+                    new XElement("ReleaseYear", movie["ReleaseYear"]),
+                    new XElement("Rating", movie["Rating"]),
+                    new XElement("Synopsis", movie["Synopsis"]));
 
-                    //new XElement("Genre", item.Genre),
-                    //new XElement("Actors", item.Actors),
+                //new XElement("Genre", item.Genre),
+                //new XElement("Actors", item.Actors),
+                Movies.Add(Movie);
+
             }
-
-           throw new NotImplementedException();
+            return Movies;//throw new NotImplementedException();
         }
 
         public XElement GetTopTenMovies()
