@@ -18,9 +18,6 @@ namespace MVC_Lab3.Models
         string synopsis;
         string genre;
         string actors;
-        // List<string> genre;
-        // List<string> actors;
-        //int MovieID;
 
         public string Title 
         {

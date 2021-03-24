@@ -14,13 +14,12 @@ namespace MVC_Lab3.Controllers
 {
     public class MoviesController : Controller
     {
-        Service1Client cliobj = new Service1Client();   //sk denna vara här? // initiera en koppling mellan vår klient och vår service
+        Service1Client cliobj = new Service1Client();   
         private MovieContext db = new MovieContext();
         // GET: Movies
         public ActionResult Index(string Input)
         {
-            //cliobj.GetAllMovies();
-
+           // cliobj.GetAllMovies();
 
             int num = -1;
             if (!int.TryParse(Input, out num))
@@ -139,12 +138,6 @@ namespace MVC_Lab3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-        public ActionResult SearchTitle(Movie movie)
-        {
-            //ViewBag.SearchTitle = movie.Title;
-            ViewBag.InputTitle = movie.Title;
-            return View(db.Movies.ToList());
         }
     }
 }

@@ -12,14 +12,11 @@ using Newtonsoft.Json.Linq;
 
 namespace WcfService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
         static List<JObject> _movies;
         static List<JObject> _actors;
         static List<JObject> _genre;
-
 
 
         public Service1()
@@ -41,34 +38,28 @@ namespace WcfService
         }
         public XElement GetAllMovies()
         {
-            //skap nytt xelement med nu rot nod t.ex movies
-            //för varje movie i _movies skapa nytt exeleemt(//jobject in vår lista skapa nytt movi som läggs till under rotnooden )
-            //movie onject 
-            //add() nytt  utanför loopen
-            foreach (var item in _movies)   //item = en jobject, en film i _movies
+
+            XElement Movies = new XElement("Movies");
+            foreach (var movie in _movies)   
             {
-                XElement Movie = new XElement("Movies",
-                    new XElement("Title", item["Title"])); 
-                    //new XElement("OriginalTitle", item.OriginalTitle),
-                    //new XElement("ReleaseYear", item.ReleaseYear),
-                    //new XElement("Rating", item.Rating),
-                    //new XElement("Synopsis", item.Synopsis)
+                XElement Movie = new XElement("Movie",
+                    new XElement("Title", movie["Title"].ToString()),
+                    new XElement("OriginalTitle", movie["OriginalTitle"].ToString()),
+                    new XElement("ReleaseYear", movie["ReleaseYear"]),
+                    new XElement("Rating", movie["Rating"]),
+                    new XElement("Synopsis", movie["Synopsis"].ToString()));
+                                                                       
+                //new XElement("Genre", item.Genre),    
+                //new XElement("Actors", item.Actors),
+                Movies.Add(Movie);
 
-                    //new XElement("Genre", item.Genre),
-                    //new XElement("Actors", item.Actors),
             }
-
-           throw new NotImplementedException();
+            return Movies;
         }
 
         public XElement GetTopTenMovies()
         {
             throw new NotImplementedException();
         }
-        // för varje t.ex movie i listan jobject
-        //public XElement(Movie movie)
-        //{
-
-        //}
     }
 }
