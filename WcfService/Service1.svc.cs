@@ -56,6 +56,7 @@ namespace WcfService
                     new XElement("Rating", movie["Rating"]),
                     new XElement("Synopsis", movie["Synopsis"]));
 
+
                 //new XElement("Genre", item.Genre),
                 //new XElement("Actors", item.Actors),
                 Movies.Add(Movie);
