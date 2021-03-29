@@ -19,7 +19,7 @@ namespace MVC_Lab3.Controllers
         // GET: Movies
         public ActionResult Index(string Input)
         {
-           // cliobj.GetAllMovies();
+            cliobj.GetAllMovies();
 
             int num = -1;
             if (!int.TryParse(Input, out num))
