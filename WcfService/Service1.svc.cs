@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
 namespace WcfService
 {
     //Update Service Reference on client side each time I change smth in Service1.cs
@@ -22,6 +23,7 @@ namespace WcfService
 
         public Service1()
         {
+            //Connects to the API and converts the collected data from json to XElements.
             using (WebClient webClient = new WebClient())
             {
                 string jsonMovieString = webClient.DownloadString(
