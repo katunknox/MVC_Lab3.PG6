@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 
 namespace WcfService
 {
-    //Update Service Reference on client side each time I change smth in Service1.cs
+    //Update Service Reference on client side each time WE change smth in Service1.cs
     public class Service1 : IService1
     {
         static List<JObject> _movies;
@@ -47,21 +47,21 @@ namespace WcfService
             {
                 foreach (JObject movie in _movies)
                 {
-                    MakeMovieXML(movie);
+                    MovieXMLList(movie);
                 }
             }
             else
             {
-                //UpdateMovies();
+                //UpdateMovies(); NOT SURE IF WE NEED THIS
                 foreach (JObject movie in _movies)
                 {
-                    MakeMovieXML(movie);
+                    MovieXMLList(movie);
                 }
             }
             return xMovies;
         }
 
-        private void MakeMovieXML(JObject joMovie)
+        private void MovieXMLList(JObject joMovie)
         {
             XElement movie = new XElement("Movie");
             foreach (var element in joMovie)
