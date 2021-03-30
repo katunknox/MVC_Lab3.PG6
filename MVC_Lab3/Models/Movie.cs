@@ -54,7 +54,35 @@ namespace MVC_Lab3.Models
             get { return actors; }
             set { actors = value; }
         }
+        //need to test if it works
+        public Movie XMLtoMovieObj(XElement movie)
+        {
+            string genres = "";
+            string actors = "";
 
+            Movie movieobj = new Movie();
+            movieobj.Title = movie.Element("Title").Value;
+            movieobj.OriginalTitle = movie.Element("OriginalTitle").Value;
+            movieobj.ReleaseYear = Convert.ToInt32(movie.Element("ReleaseYear").Value);
+            movieobj.Rating = Convert.ToDouble(movie.Element("Rating").Value);
+            movieobj.Synopsis = movie.Element("Synopsis").Value;
+            
+            foreach (var item in movie.Elements("Genres").Elements())
+            {
+                genres += item.Value.ToString() + ", "; ; // should result in "Drama, Thriller, "
+            }
+            foreach (var item in movie.Elements("Actors").Elements())
+            {
+                actors += item.Value.ToString() + ", ";
+            }
+            genres = genres.Remove(genres.Length - 2); //to remove ", " at the end of the string
+            actors = actors.Remove(actors.Length - 2);
+
+            movieobj.Genre = genres;
+            movieobj.Actors = actors;
+
+            return movieobj;
+        }
 
 
     }

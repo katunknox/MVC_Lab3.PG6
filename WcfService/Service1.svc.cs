@@ -110,30 +110,21 @@ namespace WcfService
                     where g["ID"].ToString() == val
                     select g["Name"]).First().ToString();
         }
-        /*public XElement GetAllMovies()
-        {
-
-            XElement Movies = new XElement("Movies");
-            foreach (var movie in _movies)   
-            {
-                XElement Movie = new XElement("Movie",
-                    new XElement("Title", movie["Title"].ToString()),
-                    new XElement("OriginalTitle", movie["OriginalTitle"].ToString()),
-                    new XElement("ReleaseYear", movie["ReleaseYear"]),
-                    new XElement("Rating", movie["Rating"]),
-                    new XElement("Synopsis", movie["Synopsis"].ToString()));
-                                                                       
-                //new XElement("Genre", item.Genre),    
-                //new XElement("Actors", item.Actors),
-                Movies.Add(Movie);
-
-            }
-            return Movies;
-        }*/
-
         public XElement GetTopTenMovies()
         {
-            throw new NotImplementedException();
+             
+            //var sortedAndTop10 = listofMovies.OrderByDescending(x => x.SelectToken("$.Rating")).Take(10);
+
+            XElement topTenMovies = new XElement("TopTenMovies");
+
+            //såg liknande på internet där de använde orderby men får det inte till att funka helt.
+            XElement allMovies = GetAllMovies();
+            XElement result = new XElement( "TopTen",
+                              (from m in allMovies.Elements() 
+                              orderby double.Parse(m.Element("Rating").Value)
+                              select m));
+
+            return result;
         }
     }
 }

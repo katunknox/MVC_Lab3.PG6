@@ -14,13 +14,10 @@ namespace MVC_Lab3.Controllers
 {
     public class MoviesController : Controller
     {
-        Service1Client cliobj = new Service1Client();   
         private MovieContext db = new MovieContext();
         // GET: Movies
         public ActionResult Index(string Input)
         {
-            cliobj.GetAllMovies();
-
             int num = -1;
             if (!int.TryParse(Input, out num))
             {
