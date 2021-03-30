@@ -54,7 +54,6 @@ namespace MVC_Lab3.Models
             get { return actors; }
             set { actors = value; }
         }
-        //need to test if it works
         public Movie XMLtoMovieObj(XElement movie)
         {
             string genres = "";
@@ -69,7 +68,7 @@ namespace MVC_Lab3.Models
             
             foreach (var item in movie.Elements("Genres").Elements())
             {
-                genres += item.Value.ToString() + ", "; ; // should result in "Drama, Thriller, "
+                genres += item.Value.ToString() + ", "; ; //  result in "Drama, Thriller, "
             }
             foreach (var item in movie.Elements("Actors").Elements())
             {
