@@ -11,10 +11,11 @@
 
     @using (Html.BeginForm())
     {
-            @Html.TextBox("Input")
-            <input type="submit" value="Search" class="btn btn-default" />
+        @Html.TextBox("Input")
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Back to List", "Index")
     }
-    </p>
+</p>
 <table class="table">
     <tr>
         <th>
