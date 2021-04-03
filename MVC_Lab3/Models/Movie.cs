@@ -68,13 +68,13 @@ namespace MVC_Lab3.Models
             
             foreach (var item in movie.Elements("Genres").Elements())
             {
-                genres += item.Value.ToString() + ", "; ; //  result in "Drama, Thriller, "
+                genres += item.Value.ToString() + ", ";
             }
             foreach (var item in movie.Elements("Actors").Elements())
             {
                 actors += item.Value.ToString() + ", ";
             }
-            genres = genres.Remove(genres.Length - 2); //to remove ", " at the end of the string
+            genres = genres.Remove(genres.Length - 2);
             actors = actors.Remove(actors.Length - 2);
 
             movieobj.Genre = genres;
