@@ -16,7 +16,7 @@ namespace MVC_Lab3.Controllers
     {
         private MovieContext db = new MovieContext();
         // GET: Movies
-        public ActionResult Index(string Input)
+        public ActionResult Index(int? page ,string Input)
         {
             int num = -1;
             if (!int.TryParse(Input, out num))

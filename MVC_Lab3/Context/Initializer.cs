@@ -18,7 +18,7 @@ namespace MVC_Lab3.Context
 
             var seededMovies = new List<Movie>();
             XElement movies = cliobj.GetAllMovies();
-            XElement top = cliobj.GetTopTenMovies();    //för att testa om den funkar
+            XElement top = cliobj.GetTopTenMovies();    //för att testa om den funkar. DELETE innan inlämning
             Movie mov = new Movie();
 
             foreach (var item in movies.Elements("Movie"))

@@ -40,6 +40,7 @@ namespace WcfService
             }
         }
         private XElement xMovies = new XElement("Movies");
+        private XElement TopTenMovies = new XElement("TopTenMovies");
 
         public XElement GetAllMovies()
         {
@@ -47,7 +48,7 @@ namespace WcfService
             {
                 foreach (JObject movie in _movies)
                 {
-                    MovieXMLList(movie);
+                    MovieXMLList(movie, xMovies);//MovieXMLList(movie);
                 }
             }
             else
@@ -55,13 +56,13 @@ namespace WcfService
                 //UpdateMovies(); NOT SURE IF WE NEED THIS
                 foreach (JObject movie in _movies)
                 {
-                    MovieXMLList(movie);
+                    MovieXMLList(movie, xMovies); //MovieXMLList(movie);
                 }
             }
             return xMovies;
         }
 
-        private void MovieXMLList(JObject joMovie)
+        private void MovieXMLList(JObject joMovie, XElement xml)  //test 2 argument
         {
             XElement movie = new XElement("Movie");
             foreach (var element in joMovie)
@@ -92,7 +93,7 @@ namespace WcfService
                     movie.Add(actors);
                 }
             }
-            xMovies.Add(movie);
+            xml.Add(movie);//xMovies.Add(movie);
         }
 
 
@@ -112,19 +113,13 @@ namespace WcfService
         }
         public XElement GetTopTenMovies()
         {
-             
-            //var sortedAndTop10 = listofMovies.OrderByDescending(x => x.SelectToken("$.Rating")).Take(10);
-
-            XElement topTenMovies = new XElement("TopTenMovies");
-
-            //såg liknande på internet där de använde orderby men får det inte till att funka helt.
-            XElement allMovies = GetAllMovies();
-            XElement result = new XElement( "TopTen",
-                              (from m in allMovies.Elements() 
-                              orderby double.Parse(m.Element("Rating").Value)
-                              select m));
-
-            return result;
+            XElement top10Movies = new XElement("TopTenMovies");
+            var topTenMoviesJObject = _movies.OrderByDescending(x => x.SelectToken("Rating")).Take(10);
+            foreach (var movie in topTenMoviesJObject)
+            {
+               MovieXMLList(movie, TopTenMovies);
+            }
+            return TopTenMovies;
         }
     }
 }
