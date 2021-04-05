@@ -13,17 +13,17 @@ using Newtonsoft.Json.Linq;
 
 namespace WcfService
 {
-    //Update Service Reference on client side each time WE change smth in Service1.cs
+    /// <summary>
+    /// Service class that connects to the API and converts the collected data from JSON to XElements. 
+    /// </summary>
     public class Service1 : IService1
     {
         static List<JObject> _movies;
         static List<JObject> _actors;
         static List<JObject> _genre;
 
-
         public Service1()
         {
-            //Connects to the API and converts the collected data from json to XElements.
             using (WebClient webClient = new WebClient())
             {
                 string jsonMovieString = webClient.DownloadString(
@@ -41,7 +41,11 @@ namespace WcfService
         }
         private XElement xMovies = new XElement("Movies");
         private XElement TopTenMovies = new XElement("TopTenMovies");
-
+        
+        /// <summary>
+        /// Mthod gets all movies
+        /// </summary>
+        /// <returns>All movies in one XML document</returns>
         public XElement GetAllMovies()
         {
             if (_movies != null)
@@ -53,7 +57,6 @@ namespace WcfService
             }
             else
             {
-                //UpdateMovies(); NOT SURE IF WE NEED THIS
                 foreach (JObject movie in _movies)
                 {
                     MovieXMLList(movie, xMovies); //MovieXMLList(movie);
@@ -61,7 +64,7 @@ namespace WcfService
             }
             return xMovies;
         }
-
+        
         private void MovieXMLList(JObject joMovie, XElement xml)  //test 2 argument
         {
             XElement movie = new XElement("Movie");
@@ -111,6 +114,11 @@ namespace WcfService
                     where g["ID"].ToString() == val
                     select g["Name"]).First().ToString();
         }
+
+        /// <summary>
+        /// Get the ten movies with the highest rating
+        /// </summary>
+        /// <returns>XML document with movies</returns>
         public XElement GetTopTenMovies()
         {
             XElement top10Movies = new XElement("TopTenMovies");

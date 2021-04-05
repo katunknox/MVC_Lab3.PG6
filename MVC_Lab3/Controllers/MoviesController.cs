@@ -16,13 +16,18 @@ namespace MVC_Lab3.Controllers
     public class MoviesController : Controller
     {
         private MovieContext db = new MovieContext();
-        // GET: Movies
+        
+        /// <summary>
+        /// GET: Movie
+        /// </summary>
+        /// <param name="page">page number</param>
+        /// <param name="Input">user could give search by title, genre, original title, or release year </param>
+        /// <returns>ActionResult for View Index</returns>
         public ActionResult Index(int? page ,string Input)
         {
             IPagedList<Movie> pageOfMovies;
             IPagedList<Movie> pageOfFilteredMovies;
             IPagedList<Movie> pageOfFilteredbyYear;
-
 
             int pageNumber = page ?? 1;
 
