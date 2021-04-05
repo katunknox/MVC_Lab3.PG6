@@ -8,7 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Lab3.Context;
 using MVC_Lab3.Models;
-using MVC_Lab3.ServiceReference1;
+using PagedList;
+//using MVC_Lab3.ServiceReference1;
 
 namespace MVC_Lab3.Controllers
 {
@@ -18,18 +19,38 @@ namespace MVC_Lab3.Controllers
         // GET: Movies
         public ActionResult Index(int? page ,string Input)
         {
+            IPagedList<Movie> pageOfMovies;
+            IPagedList<Movie> pageOfFilteredMovies;
+            IPagedList<Movie> pageOfFilteredbyYear;
+
+
+            int pageNumber = page ?? 1;
+
             int num = -1;
-            if (!int.TryParse(Input, out num))
+            if(!String.IsNullOrEmpty(Input))
             {
-                return View(db.Movies.Where(x => x.Title.Contains(Input) ||
-                                             x.OriginalTitle.Contains(Input) ||
-                                             x.Genre.Contains(Input) || Input == null).ToList());
-            }
-            else
-            {
-                int year = Convert.ToInt32(Input);
-                return View(db.Movies.Where(x => x.ReleaseYear == year || Input == null).ToList());
-            }
+                if (!int.TryParse(Input, out num))
+                {
+                    IEnumerable<Movie> filteredMovies = (db.Movies.Where(x => x.Title.Contains(Input) ||
+                                                 x.OriginalTitle.Contains(Input) ||
+                                                 x.Genre.Contains(Input) || Input == null).ToList());
+                    
+                    pageOfFilteredMovies = filteredMovies.ToPagedList(pageNumber, 10);
+                    return View(pageOfFilteredMovies);
+                }
+                else
+                {
+                    int year = Convert.ToInt32(Input);
+                    IEnumerable<Movie> filteredByYear= (db.Movies.Where(x => x.ReleaseYear == year || Input == null).ToList());
+                    
+                    pageOfFilteredbyYear = filteredByYear.ToPagedList(pageNumber, 10);
+                    return View(pageOfFilteredbyYear);
+                }
+            }            
+
+            IEnumerable<Movie> allMovies = db.Movies.ToList();
+            pageOfMovies = allMovies.ToPagedList(pageNumber, 10);
+            return View(pageOfMovies);
         }
 
 
