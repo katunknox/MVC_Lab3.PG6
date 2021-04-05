@@ -65,6 +65,7 @@ namespace WcfService
             return xMovies;
         }
         
+
         private void MovieXMLList(JObject joMovie, XElement xml)  //test 2 argument
         {
             XElement movie = new XElement("Movie");
@@ -99,7 +100,10 @@ namespace WcfService
             xml.Add(movie);//xMovies.Add(movie);
         }
 
-
+        /// <summary>
+        /// Method that iterates over each string in the movie's list of actors 
+        /// and searches actor's name from the corresponding ID(key)
+        /// </summary>
         private string GetActor(string val)
         {
             return (from a in _actors
@@ -107,9 +111,12 @@ namespace WcfService
                     select a["Name"]).First().ToString();
         }
 
+        /// <summary>
+        /// Method that iterates over each string in the movie's list of genres 
+        /// and searches genre's name from the corresponding ID(key)
+        /// </summary>
         private string GetGenre(string val)
         {
-
             return (from g in _genre
                     where g["ID"].ToString() == val
                     select g["Name"]).First().ToString();
@@ -118,7 +125,7 @@ namespace WcfService
         /// <summary>
         /// Get the ten movies with the highest rating
         /// </summary>
-        /// <returns>XML document with movies</returns>
+        /// <returns>XML document with top ten movies</returns>
         public XElement GetTopTenMovies()
         {
             XElement top10Movies = new XElement("TopTenMovies");
