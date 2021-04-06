@@ -77,6 +77,5 @@
         </tr>
     }
 </table>
-
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, Input = ViewData["Input"]}))
 

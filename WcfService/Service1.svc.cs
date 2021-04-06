@@ -43,30 +43,35 @@ namespace WcfService
         private XElement TopTenMovies = new XElement("TopTenMovies");
         
         /// <summary>
-        /// Mthod gets all movies
+        /// Method for getting all movies
         /// </summary>
         /// <returns>All movies in one XML document</returns>
         public XElement GetAllMovies()
         {
-            if (_movies != null)
-            {
+            //if (_movies != null)
+            //{
                 foreach (JObject movie in _movies)
                 {
-                    MovieXMLList(movie, xMovies);//MovieXMLList(movie);
+                    MovieXMLList(movie, xMovies);
                 }
-            }
-            else
-            {
-                foreach (JObject movie in _movies)
-                {
-                    MovieXMLList(movie, xMovies); //MovieXMLList(movie);
-                }
-            }
+            //}
+            //else
+            //{
+            //    foreach (JObject movie in _movies)
+            //    {
+            //        MovieXMLList(movie, xMovies);
+            //    }
+            //}
             return xMovies;
         }
-        
 
-        private void MovieXMLList(JObject joMovie, XElement xml)  //test 2 argument
+        /// <summary>
+        /// Method for converting a movie from JSON to XElement.
+        /// Adds converted movie to the given XElement "xml" as a node.
+        /// </summary>
+        /// <param name="joMovie">movie of type JSON</param>
+        /// <param name="xml">The xml file which the movie is added to</param>
+        private void MovieXMLList(JObject joMovie, XElement xml)
         {
             XElement movie = new XElement("Movie");
             foreach (var element in joMovie)
@@ -97,13 +102,15 @@ namespace WcfService
                     movie.Add(actors);
                 }
             }
-            xml.Add(movie);//xMovies.Add(movie);
+            xml.Add(movie);
         }
 
         /// <summary>
-        /// Method that iterates over each string in the movie's list of actors 
-        /// and searches actor's name from the corresponding ID(key)
+        /// Method that iterates over each actor in _actors.
+        /// Returns the actor's name where the actorID, from _actors is equal to given "val"    
         /// </summary>
+        /// <param name="val">actorsID from _movies</param>
+        /// <returns>Name of actor</returns>
         private string GetActor(string val)
         {
             return (from a in _actors
@@ -112,9 +119,11 @@ namespace WcfService
         }
 
         /// <summary>
-        /// Method that iterates over each string in the movie's list of genres 
-        /// and searches genre's name from the corresponding ID(key)
+        /// Method that iterates over each string ID in the movie's list of genreIDs.
+        /// Returns genre where genreID in _genres equals to the genreID from _movies.
         /// </summary>
+        /// <param name="val">genreID from _movies</param>
+        /// <returns>Name of genre</returns>
         private string GetGenre(string val)
         {
             return (from g in _genre
@@ -123,7 +132,7 @@ namespace WcfService
         }
 
         /// <summary>
-        /// Get the ten movies with the highest rating
+        /// Gets the top ten movies with the highest rating.
         /// </summary>
         /// <returns>XML document with top ten movies</returns>
         public XElement GetTopTenMovies()

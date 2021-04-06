@@ -6,11 +6,12 @@ using System.Xml.Linq;
 
 namespace MVC_Lab3.Models
 {
+    /// <summary>
+    /// Model class for Movie.
+    /// </summary>
     public class Movie
     {
         public int MovieID { get; set; }
-
-
         string title;
         string originalTitle;
         int releaseYear;
@@ -54,6 +55,11 @@ namespace MVC_Lab3.Models
             get { return actors; }
             set { actors = value; }
         }
+        ///<summary>
+        ///Converts given movie from XElement to Movie.
+        ///</summary>
+        ///<param name="movie"></param>
+        ///<returns>movie object of type Movie</returns>
         public Movie XMLtoMovieObj(XElement movie)
         {
             string genres = "";
@@ -74,6 +80,7 @@ namespace MVC_Lab3.Models
             {
                 actors += item.Value.ToString() + ", ";
             }
+            //To remove the last comma and space, ", " 
             genres = genres.Remove(genres.Length - 2);
             actors = actors.Remove(actors.Length - 2);
 
@@ -82,7 +89,5 @@ namespace MVC_Lab3.Models
 
             return movieobj;
         }
-
-
     }
 }

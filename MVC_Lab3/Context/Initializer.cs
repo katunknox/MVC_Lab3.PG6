@@ -12,19 +12,17 @@ namespace MVC_Lab3.Context
     public class Initializer : DropCreateDatabaseAlways<MovieContext>
     {
         Service1Client cliobj = new Service1Client();
-
         protected override void Seed(MovieContext context)
         {
-
             var seededMovies = new List<Movie>();
             XElement movies = cliobj.GetAllMovies();
-            XElement top = cliobj.GetTopTenMovies();    //för att testa om den funkar. DELETE innan inlämning
             Movie mov = new Movie();
 
-            foreach (var item in movies.Elements("Movie"))
+            //for each movie in the xml file "movies"
+            //convert to an object of type "Movie" and add to seededMovies.
+            foreach (var movie in movies.Elements("Movie"))
             {
-                seededMovies.Add(mov.XMLtoMovieObj(item));
-            
+                seededMovies.Add(mov.XMLtoMovieObj(movie));            
             }
             
             seededMovies.ForEach(m => context.Movies.Add(m));

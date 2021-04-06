@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using MVC_Lab3.Context;
 using MVC_Lab3.Models;
 using PagedList;
-//using MVC_Lab3.ServiceReference1;
 
 namespace MVC_Lab3.Controllers
 {
@@ -21,7 +20,7 @@ namespace MVC_Lab3.Controllers
         /// GET: Movie
         /// </summary>
         /// <param name="page">page number</param>
-        /// <param name="Input">user could give search by title, genre, original title, or release year </param>
+        /// <param name="Input">The given search term from the user. Can search by title, original title, genre or release year </param>
         /// <returns>ActionResult for View Index</returns>
         public ActionResult Index(int? page ,string Input)
         {
@@ -34,6 +33,8 @@ namespace MVC_Lab3.Controllers
             int num = -1;
             if(!String.IsNullOrEmpty(Input))
             {
+                //Checks if input is an int or not.
+                //If the input can be converted from string to int then the user wants to search/filter movies by release year.
                 if (!int.TryParse(Input, out num))
                 {
                     IEnumerable<Movie> filteredMovies = (db.Movies.Where(x => x.Title.Contains(Input) ||
