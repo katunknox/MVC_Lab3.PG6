@@ -48,20 +48,10 @@ namespace WcfService
         /// <returns>All movies in one XML document</returns>
         public XElement GetAllMovies()
         {
-            //if (_movies != null)
-            //{
-                foreach (JObject movie in _movies)
-                {
-                    MovieXMLList(movie, xMovies);
-                }
-            //}
-            //else
-            //{
-            //    foreach (JObject movie in _movies)
-            //    {
-            //        MovieXMLList(movie, xMovies);
-            //    }
-            //}
+            foreach (JObject movie in _movies)
+            {
+                 MovieXMLList(movie, xMovies);
+            } 
             return xMovies;
         }
 
