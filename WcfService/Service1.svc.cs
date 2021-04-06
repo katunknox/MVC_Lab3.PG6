@@ -70,7 +70,7 @@ namespace WcfService
         /// Adds converted movie to the given XElement "xml" as a node.
         /// </summary>
         /// <param name="joMovie">movie of type JSON</param>
-        /// <param name="xml">The xml file which the movie is added to</param>
+        /// <param name="xml">The xml document which the movie is added to</param>
         private void MovieXMLList(JObject joMovie, XElement xml)
         {
             XElement movie = new XElement("Movie");

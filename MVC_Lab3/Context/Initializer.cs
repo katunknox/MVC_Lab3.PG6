@@ -18,7 +18,7 @@ namespace MVC_Lab3.Context
             XElement movies = cliobj.GetAllMovies();
             Movie mov = new Movie();
 
-            //for each movie in the xml file "movies"
+            //for each movie in the xml dokument "movies"
             //convert to an object of type "Movie" and add to seededMovies.
             foreach (var movie in movies.Elements("Movie"))
             {
